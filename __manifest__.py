@@ -11,9 +11,6 @@
     "category": "Manufacturing",
     "version": "18.0.1.1.0",
     "depends": ["sale", "mrp", "stock"],
-    "data": [
-        # "views/sale_order_views.xml",
-    ],
     "installable": True,
     "application": False,
     "auto_install": False,
