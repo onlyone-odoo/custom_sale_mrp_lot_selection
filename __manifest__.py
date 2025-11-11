@@ -9,10 +9,10 @@
     "maintainers": ["onlyone-odoo"],
     "website": "https://onlyone.odoo.com/",
     "category": "Manufacturing",
-    "version": "18.0.1.0.0",
+    "version": "18.0.1.1.0",
     "depends": ["sale", "mrp", "stock"],
     "data": [
-        "views/sale_order_views.xml",
+        # "views/sale_order_views.xml",
     ],
     "installable": True,
     "application": False,
