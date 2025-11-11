@@ -1,3 +1,4 @@
+# Copyright 2025 Your Company <https://yourcompany.com>
 # License AGPL-3.0 or later[](https://www.gnu.org/licenses/agpl).
 
 from odoo import models
@@ -18,6 +19,7 @@ class StockRule(models.Model):
         origin,
         company_id,
         values,
+        bom,
     ):
         """Override to add component_lot_id from sale.order.line."""
         vals = super()._prepare_mo_vals(
@@ -29,6 +31,7 @@ class StockRule(models.Model):
             origin,
             company_id,
             values,
+            bom,
         )
         so = self.env["sale.order"].search([("name", "=", origin)], limit=1)
         if so:
