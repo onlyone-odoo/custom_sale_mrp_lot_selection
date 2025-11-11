@@ -39,7 +39,10 @@ class StockRule(models.Model):
         _logger.info(
             f"Preparing MO vals for origin {origin}, product {product_id.id}, qty {product_qty}"
         )
-        so = self.env["sale.order"].search([("name", "=", origin)], limit=1)
+        # Parse origin to extract SO name (handle concatenated like 'SO/WAREHOUSE')
+        so_name = origin.split("/")[0] if "/" in origin else origin
+        _logger.info(f"Parsed SO name from origin: {so_name}")
+        so = self.env["sale.order"].search([("name", "=", so_name)], limit=1)
         if so:
             _logger.info(f"Found SO {so.name} (id {so.id})")
             sol = so.order_line.filtered(
