@@ -1,3 +1,4 @@
+# Copyright 2025 Your Company <https://yourcompany.com>
 # License AGPL-3.0 or later[](https://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models
@@ -24,9 +25,12 @@ class SaleOrderLine(models.Model):
     def _compute_component_product_id(self):
         """Compute the main component product from the BOM."""
         for line in self:
-            bom = self.env["mrp.bom"]._bom_find(line.product_id)
-            if bom and bom.bom_line_ids:
-                # Assume first component is the main one (e.g., 'Rollo Completo'); tweak if needed.
-                line.component_product_id = bom.bom_line_ids[0].product_id
-            else:
-                line.component_product_id = False
+            line.component_product_id = False
+        products = self.mapped("product_id")
+        if products:
+            boms = self.env["mrp.bom"]._bom_find(products)
+            for line in self:
+                bom = boms.get(line.product_id)
+                if bom and bom.bom_line_ids:
+                    # Assume first component is the main one (e.g., 'Rollo Completo'); tweak if needed.
+                    line.component_product_id = bom.bom_line_ids[0].product_id
