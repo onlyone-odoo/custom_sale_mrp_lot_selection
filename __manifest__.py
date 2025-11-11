@@ -9,7 +9,7 @@
     "maintainers": ["onlyone-odoo"],
     "website": "https://onlyone.odoo.com/",
     "category": "Manufacturing",
-    "version": "18.0.2.1.0",
+    "version": "18.0.3.1.0",
     "depends": ["sale", "mrp", "stock"],
     "installable": True,
     "application": False,
