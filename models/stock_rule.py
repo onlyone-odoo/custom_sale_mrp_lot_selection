@@ -47,16 +47,15 @@ class StockRule(models.Model):
             _logger.info(f"Found SO {so.name} (id {so.id})")
             sol = so.order_line.filtered(
                 lambda l: l.product_id == product_id
-                and l.product_uom_qty == product_qty
             )
             if sol:
-                sol = sol[0]  # Explicit first if multiple (rare)
+                sol = sol[0]  # Take the first matching SOL
                 vals["component_lot_id"] = sol.component_lot_id.id
                 _logger.info(
                     f"Found SOL id {sol.id}, setting component_lot_id to {sol.component_lot_id.id}"
                 )
             else:
-                _logger.info("No matching SOL found for product/qty")
+                _logger.info(f"No matching SOL found for product {product_id.id}")
         else:
             _logger.info("No SO found for origin")
         _logger.info(f"Final MO vals component_lot_id: {vals.get('component_lot_id')}")
