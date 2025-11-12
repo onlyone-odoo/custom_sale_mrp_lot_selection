@@ -10,7 +10,7 @@
     "website": "https://onlyone.odoo.com/",
     "category": "Manufacturing",
     "version": "18.0.3.2.1",
-    "depends": ["sale", "mrp", "stock"],
+    "depends": ["sale_management", "mrp", "stock"],
     "data": ["views/sale_order_line_views.xml"],
     "installable": True,
     "application": False,
