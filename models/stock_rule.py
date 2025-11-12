@@ -45,9 +45,7 @@ class StockRule(models.Model):
         so = self.env["sale.order"].search([("name", "=", so_name)], limit=1)
         if so:
             _logger.info(f"Found SO {so.name} (id {so.id})")
-            sol = so.order_line.filtered(
-                lambda l: l.product_id == product_id
-            )
+            sol = so.order_line.filtered(lambda l: l.product_id == product_id)
             if sol:
                 sol = sol[0]  # Take the first matching SOL
                 vals["component_lot_id"] = sol.component_lot_id.id
